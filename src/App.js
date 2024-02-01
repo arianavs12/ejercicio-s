@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FormularioComponent from './components/FormularioComponent';
+import CalculadoraSerie from './components/CalculadoraSerie';
+import ResultComponent from './components/ResultadoComponent';
 
-function App() {
+const App = () => {
+  const [number, setNumber] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const handleNumeroChange = (n) => {
+    setNumber(n);
+  };
+
+  const handleResultadoChange = (res) => {
+    setResult(res);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <FormularioComponent onNumeroChange={handleNumeroChange} />
+      {number !== null && <CalculadoraSerie number={number} onResultadoChange={handleResultadoChange} />}
+      {result !== null && <ResultComponent result={result}/>}
     </div>
   );
-}
+};
 
 export default App;
